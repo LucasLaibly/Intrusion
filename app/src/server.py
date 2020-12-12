@@ -1,5 +1,5 @@
-from flask import Flask, jsonify
-import browserhistory as bh
+from flask import Flask
+from flask_restful import Api
 
 server = Flask(__name__)
 
@@ -7,14 +7,5 @@ server = Flask(__name__)
 def hello():
     return "Server is running..."
 
-@server.route('/history')
-def history():
-    dict_obj = bh.get_browserhistory()
-
-    dict_obj.keys()
-
-    return jsonify(dict_obj)
-
-
 if __name__ == "__main__":
-    server.run(host='0.0.0.0', port=5000)
+    server.run(host='127.0.0.1', port=5000)
