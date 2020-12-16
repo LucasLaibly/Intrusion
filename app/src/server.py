@@ -1,11 +1,26 @@
+import os
+import app.src.config as config
+
 from flask import Flask
-from flask_restful import Api
 
-server = Flask(__name__)
 
-@server.route('/')
-def hello():
-    return "Server is running..."
+def create(environment):
+    config_map = {
+        'development': config.Development(),
+        'testing': config.Testing(),
+        'production': config.Production
+    }
 
-if __name__ == "__main__":
-    server.run(host='127.0.0.1', port=5000)
+    config_obj = config_map[environment.lower()]
+
+    app = Flask(__name__)
+    app.config.from_object(config_obj)
+
+    ''' This is the same as base() in main.py'''
+    app.add_url_rule('/', 'home', home)
+
+    return app
+
+
+def home():
+    return dict(name='Server running..')
