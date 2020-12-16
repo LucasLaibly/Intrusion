@@ -16,6 +16,7 @@ def create(environment):
     app = Flask(__name__)
     app.config.from_object(config_obj)
 
+    ''' This is the same as base() in main.py'''
     app.add_url_rule('/', 'home', home)
 
     return app
