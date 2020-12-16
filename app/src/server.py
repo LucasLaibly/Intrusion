@@ -22,4 +22,4 @@ def create(environment):
 
 
 def home():
-    return dict(name='FLASK REST API')
+    return dict(name='Server running..')
