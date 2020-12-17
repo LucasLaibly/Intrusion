@@ -7,6 +7,7 @@ class ProfanityCheck:
         self.censored_list = list(censored_list or [])
         self.load_words()
 
+    '''Load profanity into censored words list'''
     def load_words(self) -> None:
         base_dir = os.path.dirname(__file__)
         profanity_list = os.path.join(base_dir, 'data', 'profanity_list.txt')
@@ -14,6 +15,7 @@ class ProfanityCheck:
         with open(profanity_list, 'r') as words:
             self.censored_list = [line.strip() for line in words]
 
+    '''Check if a word is dirty'''
     def is_dirty(self, input_url: str) -> bool:
         # any(word in input_url for word in self.censored_list)
         if input_url in self.censored_list:
