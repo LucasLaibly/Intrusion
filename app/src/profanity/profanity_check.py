@@ -1,9 +1,11 @@
-from typing import List, Sequence
+from typing import List
+from urllib.parse import urlparse
 import os
+import re
 
 
 class ProfanityCheck:
-    def __init__(self, censored_list: Sequence[str] = None) -> None:
+    def __init__(self, censored_list: List[str] = None) -> None:
         self.censored_list = list(censored_list or [])
         self.load_words()
 
@@ -16,9 +18,13 @@ class ProfanityCheck:
             self.censored_list = [line.strip() for line in words]
 
     '''Check if a word is dirty'''
-    def is_dirty(self, input_url: str) -> bool:
+    def is_dirty(self, input_url: dict) -> bool:
         # any(word in input_url for word in self.censored_list)
-        if input_url in self.censored_list:
-            return True
-        else:
-            return False
+        for key, value in input_url.items():
+            to_parse = urlparse(value).geturl()
+            word = re.search(r'\.(.*)\.', to_parse, re.IGNORECASE).group(1)
+            for censored_word in self.censored_list:
+                if word.find(censored_word) != -1:
+                    return True
+
+        return False

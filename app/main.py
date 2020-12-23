@@ -7,9 +7,13 @@ app = create('development')
 profanity_checker = ProfanityCheck()
 
 
-@app.route('/test/<string:word>', methods=['GET', 'POST'])
-def base(word):
-    test = profanity_checker.is_dirty(word)
+@app.route('/test', methods=['GET'])
+def base():
+    thisdict = {
+        "0": "https://www.uranus.com",
+        "1": "https://www.intrusion.io"
+    }
+    test = profanity_checker.is_dirty(thisdict)
     if test:
         return 'True'
     else:
@@ -19,17 +23,13 @@ def base(word):
 @app.route('/browser/<string:browser>', methods=['GET'])
 def history(browser):
     if browser.lower() == 'firefox':
-        f = Firefox()
-        his = f.fetch().get()
+        thisdict = {
+            "0": "https://www.uranus.com",
+            "1": "https://www.intrusion.io"
+        }
 
-        print(dict(his))
+        print(thisdict)
         return 'true'
-
-    elif browser.lower() == 'chrome':
-        c = Chrome()
-
-    elif browser.lower() == 'safari':
-        return 'Get a real browser ... that we can use please.'
 
     else:
         return 'No browser set'
