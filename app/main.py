@@ -11,9 +11,11 @@ def base():
     this_dict = {
         "0": "https://www.uranus.com",
         "1": "https://www.intrusion.io",
-        "2": "https://www.myanus.com"
+        "2": "https://www.myanus.com",
+        "3": "https://www.uranus.com"
     }
     test = profanity_checker.is_dirty(this_dict)
+    print(test)
     if test:
         return 'True'
     else:

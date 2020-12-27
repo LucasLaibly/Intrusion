@@ -18,14 +18,17 @@ class ProfanityCheck:
             self.censored_list = [line.strip() for line in words]
 
     '''Check if a word is dirty'''
-    def is_dirty(self, input_url: dict) -> tuple:
-        occurences = ()
+    def is_dirty(self, input_url: dict) -> dict:
+        occurences = dict()
         # any(word in input_url for word in self.censored_list)
         for key, value in input_url.items():
             to_parse = urlparse(value).geturl()
             word = re.search(r'\.(.*)\.', to_parse, re.IGNORECASE).group(1)
             for censored_word in self.censored_list:
                 if word.find(censored_word) != -1:
-                    return occurences
+                    if word in occurences:
+                        occurences[to_parse] += 1
+                    else:
+                        occurences[to_parse] = 1
 
         return occurences
