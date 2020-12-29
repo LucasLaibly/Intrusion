@@ -13,14 +13,15 @@ def base():
         "0": "https://www.uranus.com",
         "1": "https://www.intrusion.io",
         "2": "https://www.myanus.com",
-        "3": "https://www.uranus.com"
+        "3": "https://www.uranus.com",
+        "4": "https://www.chess.com"
     }
     test = profanity_checker.is_dirty(this_dict)
 
     if test:
         return jsonify(test)
     else:
-        return 'No history.'
+        return jsonify(test)
 
 
 @app.route('/censor/<string:word>')
