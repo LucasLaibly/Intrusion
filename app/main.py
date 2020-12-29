@@ -1,3 +1,4 @@
+from flask import jsonify
 from app.src.server import create
 from app.src.profanity.profanity_check import ProfanityCheck
 from browser_history.browsers import Firefox, Chrome, Safari
@@ -6,7 +7,7 @@ app = create('development')
 profanity_checker = ProfanityCheck()
 
 
-@app.route('/lobby', methods=['GET'])
+@app.route('/user', methods=['GET'])
 def base():
     this_dict = {
         "0": "https://www.uranus.com",
@@ -15,11 +16,17 @@ def base():
         "3": "https://www.uranus.com"
     }
     test = profanity_checker.is_dirty(this_dict)
-    print(test)
+
     if test:
-        return 'True'
+        return jsonify(test)
     else:
-        return 'False'
+        return 'No history.'
+
+
+@app.route('/censor/<string:word>')
+def add_word(word):
+    profanity_checker.add_word(word)
+    return 'Added word!'
 
 
 if __name__ == "__main__":
