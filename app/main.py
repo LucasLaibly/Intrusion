@@ -16,12 +16,12 @@ def base():
         "3": "https://www.uranus.com",
         "4": "https://www.chess.com"
     }
-    test = profanity_checker.is_dirty(this_dict)
+    response = profanity_checker.is_dirty(this_dict)
 
-    if test:
-        return jsonify(test)
+    if response:
+        return jsonify(response)
     else:
-        return jsonify(test)
+        return jsonify(response)
 
 
 @app.route('/censor/<string:word>')
