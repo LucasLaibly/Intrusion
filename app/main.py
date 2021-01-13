@@ -1,20 +1,24 @@
+import eventlet
 from flask import jsonify
-from app.src.server import create
 from app.src.profanity.profanity_check import ProfanityCheck
 from flask import Flask, render_template
+from flask_cors import CORS
 from flask_socketio import SocketIO
 from flask_socketio import send, emit
-
 from browser_history.browsers import Firefox, Chrome, Safari
+
+eventlet.monkey_patch()
 
 profanity_checker = ProfanityCheck()
 
 app = Flask(__name__)
+# all domains on all routes: https://flask-cors.readthedocs.io/en/latest/
+CORS(app)
 
 app.config['SECRET_KEY'] = 'secret!'
 app.config['DEBUG'] = True
 
-socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 
 @app.route('/user', methods=['GET'])
@@ -58,4 +62,4 @@ def handle_my_custom_event(json):
 
 
 if __name__ == "__main__":
-    socketio.run(app, host='127.0.0.1', port=5000, cors_allowed_origins='*')
+    socketio.run(app, host='127.0.0.1', port=5000)
