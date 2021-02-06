@@ -8,6 +8,7 @@ class SocialCheck:
     def __init__(self, socials_list: List[str] = None) -> None:
         self.socials_list = list(socials_list or [])
         self.load_socials()
+
     '''
     Load socials
     '''
