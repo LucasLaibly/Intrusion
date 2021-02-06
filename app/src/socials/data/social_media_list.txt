@@ -2,5 +2,3 @@ twitter
 instagram
 facebook
 parler
-youtube
-twitch

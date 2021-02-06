@@ -1,7 +1,9 @@
 from typing import List
+from array import *;
 from urllib.parse import urlparse
 import os
 import re
+
 
 class SocialCheck:
     def __init__(self, socials_list: List[str] = None) -> None:
@@ -14,3 +16,30 @@ class SocialCheck:
 
         with open(socials_list, 'r') as sites:
             self.socials_list = [line.strip() for line in sites]
+
+    def find_origin(self, social_media: dict) -> dict:
+        socials = dict()
+
+        # ea. social media site gets it's own index
+        for item in self.socials_list:
+            socials[item] = []
+
+        # based on history, fill in ea. unique index
+        for key, value in social_media.items():
+            to_parse = urlparse(value).geturl()
+            word = re.search(r'\.(.*)\.', to_parse, re.IGNORECASE).group(1)
+            if word == "instagram":
+                socials["instagram"].append(to_parse)
+            elif word == "facebook":
+                socials["facebook"] = [to_parse]
+            elif word == "twitter":
+                socials["twitter"] = [to_parse]
+            elif word == "parler":
+                socials["parler"] = [to_parse]
+        print(socials)
+        return socials
+
+    # def is_instagram(self):
+    # def is_facebook(self):
+    # def is_twitter(self):
+    # def is_parler(self):
