@@ -37,11 +37,11 @@ class SocialCheck:
             if word == "instagram":
                 socials["instagram"].append(to_parse)
             elif word == "facebook":
-                socials["facebook"] = [to_parse]
+                socials["facebook"].append(to_parse)
             elif word == "twitter":
-                socials["twitter"] = [to_parse]
+                socials["twitter"].append(to_parse)
             elif word == "parler":
-                socials["parler"] = [to_parse]
+                socials["parler"].append(to_parse)
 
         return socials
 

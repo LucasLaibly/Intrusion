@@ -18,13 +18,11 @@ def base():
         "3": "https://www.twitter.com/home",
         "4": "https://www.chess.com"
     }
-    # response = profanity_checker.is_dirty(this_dict)
-    response = social_checker.find_origin(this_dict)
+    profanity_response    = profanity_checker.is_dirty(this_dict)
+    social_media_response = social_checker.find_origin(this_dict)
 
-    if response:
-        return jsonify(response)
-    else:
-        return jsonify(response)
+    if social_media_response:
+        return jsonify(social_media_response)
 
 
 @app.route('/censor/<string:word>')
