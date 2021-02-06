@@ -1,5 +1,4 @@
 from typing import List
-from array import *;
 from urllib.parse import urlparse
 import os
 import re
@@ -9,7 +8,9 @@ class SocialCheck:
     def __init__(self, socials_list: List[str] = None) -> None:
         self.socials_list = list(socials_list or [])
         self.load_socials()
-
+    '''
+    Load socials
+    '''
     def load_socials(self) -> None:
         base_dir = os.path.dirname(__file__)
         socials_list = os.path.join(base_dir, 'data', 'social_media_list.txt')
@@ -17,6 +18,11 @@ class SocialCheck:
         with open(socials_list, 'r') as sites:
             self.socials_list = [line.strip() for line in sites]
 
+    '''
+    Build dictionary of available social media sites to look for,
+    Once found, operate on each url per it's base platform,
+    We will be weighting ea. site based on the content provided
+    '''
     def find_origin(self, social_media: dict) -> dict:
         socials = dict()
 
@@ -36,7 +42,7 @@ class SocialCheck:
                 socials["twitter"] = [to_parse]
             elif word == "parler":
                 socials["parler"] = [to_parse]
-        print(socials)
+
         return socials
 
     # def is_instagram(self):
