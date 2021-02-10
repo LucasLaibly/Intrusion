@@ -73,6 +73,7 @@ def on_join(data):
     print(username + ' has entered the room.')
     emit('message', username + ' has entered the room.', room=room, callback=ack)
 
+
 @socketio.on('leave')
 def on_leave(data):
     username = data['username']
@@ -86,6 +87,7 @@ def on_leave(data):
 @socketio.on_error()  # Handles the default namespace
 def error_handler(e):
     pass
+
 
 @socketio.on_error_default  # handles all namespaces without an explicit error handler
 def default_error_handler(e):
