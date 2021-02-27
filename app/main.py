@@ -14,15 +14,18 @@ def base():
     this_dict = {
         "0": "https://www.instagram.com/LucasLaibly",
         "1": "https://www.facebook.com",
-        "2": "https://www.instagram.com/something",
+        "2": "https://www.instagram.com/LucasLaibly",
         "3": "https://www.twitter.com/home",
-        "4": "https://www.chess.com"
+        "4": "https://www.chess.com",
+        "5": "https://www.onlyfans.com/this-is-not-a-real-user"
     }
-    profanity_response    = profanity_checker.is_dirty(this_dict)
-    social_media_response = social_checker.find_origin(this_dict)
+    profanity_response = profanity_checker.is_dirty(this_dict)
+    social_media_response = social_checker.find_social_media(this_dict)
+    parsed_social_media = social_checker.check_frequencies(social_media_response)
+    print(parsed_social_media)
 
-    if social_media_response:
-        return jsonify(social_media_response)
+    if parsed_social_media:
+        return jsonify(parsed_social_media)
 
 
 @app.route('/censor/<string:word>')
