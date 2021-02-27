@@ -56,7 +56,7 @@ class SocialCheck:
     def check_frequencies(self, social_media: dict) -> dict:
         frequency = dict()
 
-        if not social_media:
+        if social_media == {}:
             frequency["empty"] = True
         else:
             for item in social_media:

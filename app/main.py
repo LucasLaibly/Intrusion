@@ -11,7 +11,9 @@ social_checker = SocialCheck()
 
 @app.route('/user', methods=['GET'])
 def base():
-    this_dict = {
+    testing_dict_empty = {}
+
+    testing_dict_full = {
         "0": "https://www.instagram.com/LucasLaibly",
         "1": "https://www.facebook.com",
         "2": "https://www.instagram.com/LucasLaibly",
@@ -19,12 +21,13 @@ def base():
         "4": "https://www.chess.com",
         "5": "https://www.onlyfans.com/this-is-not-a-real-user"
     }
-    profanity_response = profanity_checker.is_dirty(this_dict)
-    social_media_response = social_checker.find_social_media(this_dict)
+    profanity_response = profanity_checker.is_dirty(testing_dict_full)
+    social_media_response = social_checker.find_social_media(testing_dict_full)
     parsed_social_media = social_checker.check_frequencies(social_media_response)
-    print(parsed_social_media)
 
-    if parsed_social_media:
+    if "empty" in parsed_social_media:
+        return "Nothing to return here."
+    else:
         return jsonify(parsed_social_media)
 
 
