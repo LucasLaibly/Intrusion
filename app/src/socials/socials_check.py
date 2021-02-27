@@ -24,7 +24,7 @@ class SocialCheck:
     Once found, operate on each url per it's base platform,
     We will be weighting ea. site based on the content provided
     '''
-    def find_origin(self, social_media: dict) -> dict:
+    def find_social_media(self, social_media: dict) -> dict:
         socials = dict()
 
         # ea. social media site gets it's own index
@@ -43,10 +43,27 @@ class SocialCheck:
                 socials["twitter"].append(to_parse)
             elif word == "parler":
                 socials["parler"].append(to_parse)
+            elif word == "onlyfans":
+                socials["onlyfans"].append(to_parse)
 
         return socials
 
-    # def is_instagram(self):
-    # def is_facebook(self):
-    # def is_twitter(self):
-    # def is_parler(self):
+    '''
+    After searching for each of the designated social media sites, look to sort
+    and condense findings -- specifically, look to determine frequency of site
+    visited per sort
+    '''
+    def check_frequencies(self, social_media: dict) -> dict:
+        frequency = dict()
+
+        if not social_media:
+            frequency["empty"] = True
+        else:
+            for item in social_media:
+                for index in social_media[item]:
+                    print(index)
+                    if index in frequency:
+                        frequency[index] += 1
+                    else:
+                        frequency[index] = 1
+        return frequency
