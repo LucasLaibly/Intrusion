@@ -1,4 +1,4 @@
 .idea/*
 env/*
 *.pyc
-.app/src/profanity/data/profanity_list.txt
+app/src/profanity/data/profanity_list.txt
